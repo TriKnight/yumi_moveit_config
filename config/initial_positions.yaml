@@ -1,0 +1,19 @@
+# Default initial positions for yumi's ros2_control fake system
+
+initial_positions:
+  gripper_l_joint: 0
+  gripper_r_joint: 0
+  yumi_robl_joint_1: 0
+  yumi_robl_joint_2: 0
+  yumi_robl_joint_3: 0
+  yumi_robl_joint_4: 0
+  yumi_robl_joint_5: 0
+  yumi_robl_joint_6: 0
+  yumi_robl_joint_7: 0
+  yumi_robr_joint_1: 0
+  yumi_robr_joint_2: 0
+  yumi_robr_joint_3: 0
+  yumi_robr_joint_4: 0
+  yumi_robr_joint_5: 0
+  yumi_robr_joint_6: 0
+  yumi_robr_joint_7: 0

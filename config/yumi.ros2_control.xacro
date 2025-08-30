@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:macro name="yumi_ros2_control" params="name initial_positions_file">
+    <xacro:property name="initial_positions" value="${load_yaml(initial_positions_file)['initial_positions']}"/>
+
+    <ros2_control name="${name}" type="system">
+      <hardware>
+        <plugin>mock_components/GenericSystem</plugin>
+      </hardware>
+
+      <!-- Right Arm Joints -->
+      <joint name="yumi_robr_joint_1">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robr_joint_1']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robr_joint_2">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robr_joint_2']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robr_joint_3">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robr_joint_3']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robr_joint_4">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robr_joint_4']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robr_joint_5">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robr_joint_5']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robr_joint_6">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robr_joint_6']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robr_joint_7">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robr_joint_7']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+
+      <!-- Left Arm Joints -->
+      <joint name="yumi_robl_joint_1">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robl_joint_1']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robl_joint_2">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robl_joint_2']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robl_joint_3">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robl_joint_3']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robl_joint_4">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robl_joint_4']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robl_joint_5">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robl_joint_5']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robl_joint_6">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robl_joint_6']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+      <joint name="yumi_robl_joint_7">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['yumi_robl_joint_7']}</param>
+        </state_interface>
+        <state_interface name="velocity"/>
+      </joint>
+
+      <!-- Grippers -->
+      <joint name="gripper_r_joint">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['gripper_r_joint']}</param>
+        </state_interface>
+      </joint>
+      <joint name="gripper_l_joint">
+        <command_interface name="position"/>
+        <state_interface name="position">
+          <param name="initial_value">${initial_positions['gripper_l_joint']}</param>
+        </state_interface>
+      </joint>
+
+      <!-- ROS 2 Controllers -->
+      <controller name="right_arm_controller" type="joint_trajectory_controller/JointTrajectoryController">
+        <joints>
+          yumi_robr_joint_1
+          yumi_robr_joint_2
+          yumi_robr_joint_3
+          yumi_robr_joint_4
+          yumi_robr_joint_5
+          yumi_robr_joint_6
+          yumi_robr_joint_7
+        </joints>
+        <command_interfaces>position</command_interfaces>
+        <state_interfaces>position</state_interfaces>
+        <state_interfaces>velocity</state_interfaces>
+      </controller>
+
+      <controller name="left_arm_controller" type="joint_trajectory_controller/JointTrajectoryController">
+        <joints>
+          yumi_robl_joint_1
+          yumi_robl_joint_2
+          yumi_robl_joint_3
+          yumi_robl_joint_4
+          yumi_robl_joint_5
+          yumi_robl_joint_6
+          yumi_robl_joint_7
+        </joints>
+        <command_interfaces>position</command_interfaces>
+        <state_interfaces>position</state_interfaces>
+        <state_interfaces>velocity</state_interfaces>
+      </controller>
+
+      <controller name="right_gripper_controller" type="position_controllers/GripperActionController">
+        <joints>
+          gripper_r_joint
+        </joints>
+        <command_interfaces>position</command_interfaces>
+        <state_interfaces>position</state_interfaces>
+      </controller>
+
+      <controller name="left_gripper_controller" type="position_controllers/GripperActionController">
+        <joints>
+          gripper_l_joint
+        </joints>
+        <command_interfaces>position</command_interfaces>
+        <state_interfaces>position</state_interfaces>
+      </controller>
+
+    </ros2_control>
+  </xacro:macro>
+</robot>
+
